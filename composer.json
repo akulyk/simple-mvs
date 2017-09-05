@@ -1,0 +1,17 @@
+{
+    "name": "akulyk/mvc",
+    "description": "Small MVC Framework.",
+    "keywords": ["framework", "mvc"],
+    "license": "MIT",
+    "type": "project",
+    "require": {
+        "php": ">=5.6"
+       
+    },
+    "autoload": {
+        "psr-4": {
+             "Core\\": "core/",
+             "App\\": "app/"
+        }
+    }
+}
