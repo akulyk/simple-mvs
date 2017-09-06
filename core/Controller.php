@@ -50,8 +50,12 @@ abstract class Controller
     public function __call($name, $args)
     {
         $method = $name . 'Action';
-
+       
+      
         if (method_exists($this, $method)) {
+            
+        $args = array_merge($args,$this->getMethodArgs($method));
+            
             if ($this->before() !== false) {
                 call_user_func_array([$this, $method], $args);
                 $this->after();
@@ -59,6 +63,61 @@ abstract class Controller
         } else {
             throw new \Exception("Method $method not found in controller " . get_class($this));
         }
+    }/**/
+    
+    /*
+    * check if method has parameters with the same name as $_GET
+    * return @array
+    */
+    protected function getMethodArgs($method){
+        $args = [];
+        $ReflectionMethod =  new \ReflectionMethod($this, $method);
+        $params = $ReflectionMethod->getParameters();
+
+        $paramNames = array_map(function( $item ){
+        return $item->getName();
+        }, $params);
+        foreach($paramNames as $k => $name){
+            if(isset($_GET[$name])){
+                $args[$k] = $_GET[$name];
+            }
+        }
+        
+     return $args;
+    }/**/
+    
+    
+    /*
+    * redirects to controller/action?paramName=paramValue
+    */
+    public function redirect($url,$params = [], $statusCode = 302){
+        $host = $_SERVER['HTTP_HOST'];    
+        $location = $host . '/'. $url;
+       
+        $location .=$this->prepareQueryString($params);
+        
+        header("Location: http://{$location}",true,$statusCode);
+        exit;
+    }
+    /**
+     * Prepare string params for redirect.
+     *
+     * @return string
+     */
+    protected function prepareQueryString($params){
+         $queryString = '';
+        if(count($params)>0){
+            $i = 1;
+             $queryString .="?";
+            foreach ($params as $k => $v){
+                $queryString .= "{$k}={$v}";
+                if($i< count($params)){
+                   $queryString .="&"; 
+                }
+            }
+            
+        }
+        return $queryString;
     }
 
     /**

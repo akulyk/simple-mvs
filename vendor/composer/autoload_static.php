@@ -28,11 +28,22 @@ class ComposerStaticInit7c0baa335460178fecca298af007aa1c
         ),
     );
 
+    public static $prefixesPsr0 = array (
+        'J' => 
+        array (
+            'JasonGrimes' => 
+            array (
+                0 => __DIR__ . '/..' . '/jasongrimes/paginator/src',
+            ),
+        ),
+    );
+
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit7c0baa335460178fecca298af007aa1c::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit7c0baa335460178fecca298af007aa1c::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit7c0baa335460178fecca298af007aa1c::$prefixesPsr0;
 
         }, null, ClassLoader::class);
     }

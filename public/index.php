@@ -22,6 +22,8 @@ set_exception_handler('Core\Error::exceptionHandler');
 $router = new Core\Router();
 
 // Add the routes
-$router->add('', ['controller' => 'Home', 'action' => 'index']);
+$router->add('', ['controller' => 'Task', 'action' => 'index']);
+$router->add('task/add', ['controller' => 'Task', 'action' => 'add']);
+$router->add('task/view', ['controller' => 'Task', 'action' => 'view']);
     
 $router->dispatch($_SERVER['QUERY_STRING']);
