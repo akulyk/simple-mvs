@@ -1,0 +1,34 @@
+
+
+nav .pagination{
+    justify-content:center;
+    
+}
+div.sort{
+    display:inline-block;
+  
+    
+}
+div.sort a{
+    text-decoration:none;
+    color:inherit;
+    
+}
+div.sort a:hover,
+div.sort a.active{
+color:#007bff;
+}
+
+#add-new-task{
+    display:block;
+}
+.edit-form{
+    
+    margin:70px;
+    
+}
+
+footer p{
+    margin-bottom:0;
+    font-size:0.7rem
+}

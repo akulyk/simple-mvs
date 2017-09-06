@@ -36,7 +36,7 @@ abstract class Model
     
     
          
-    protected function getTableName(){
+    public function getTableName(){
          return $this->tablePrefix.$this->table;
          
     }/**/
@@ -47,12 +47,22 @@ abstract class Model
         
     }/**/
     
+    /*
+    *  finds all records in db accordind to criteria
+    * @param $criteria = []
+    */
     public static function findAll($criteria =[])
     {
         $class = new static;
         $models = [];
         $bind = [];
         $sql =  'SELECT * FROM '.$class->getTableName();
+        if(isset($criteria['join']) && $criteria['join']){
+            $sql .= " ".$criteria['join']." ";
+        }
+         if(isset($criteria['order_by']) && $criteria['order_by']){
+            $sql .= " ".$criteria['order_by']." ";
+        }
         if(isset($criteria['limit'])){
           $sql .= " LIMIT :limit ";  
           $bind[':limit'] = $criteria['limit'];
@@ -81,20 +91,30 @@ abstract class Model
        }
         $rows = $query->fetchAll(PDO::FETCH_ASSOC);
        
+       if(count($rows)>0){
         foreach ($rows as $row){
             $models[] = static::create($row);
         }
+       }
         
         return $models;
         
     }/**/
     
+    /*
+    * get a single record from bd
+    */   
     public static function findOne($id){
         $class = new static();
         $sql =  'SELECT * FROM '.$class->getTableName().' WHERE id =:id';
         $query = $class->db->prepare($sql);
         $query->execute(array(':id'=>$id));
-        return static::create ($query->fetch(PDO::FETCH_ASSOC));
+        $row = $query->fetch(PDO::FETCH_ASSOC);
+        if($row){
+        return static::create ($row);
+        }
+        
+        return false;
     }/**/
     
     /*
@@ -120,12 +140,14 @@ abstract class Model
     * saves data from model to db
     */
     public function save(){
+        if($this->validate()){
          if($this->id){
              return $this->update();
          }
          
          return $this->insert($this->getParamsForInsert());
-         
+        } 
+        return false;
      }/**/
     
     public function getErrors(){
@@ -184,13 +206,29 @@ abstract class Model
         
     }/**/
     
+    /*
+    * function in development
+    */
     public function update(){
         
         
     }
     
+    /*
+    * set an error for model
+    */
     public function setError($field,$error){
         $this->errors[$field] = $error;
+        
+    }/**/
+    
+    /* function returns specific error for model
+    * @return string
+    */
+     public function getError($field){
+         if(isset($this->errors[$field]) && $this->errors[$field]){
+        return $this->errors[$field];
+         }
         
     }/**/
     

@@ -29,8 +29,15 @@ class Paginator extends \JasonGrimes\Paginator{
         }
 
         foreach ($this->getPages() as $page) {
+           
             if ($page['url']) {
-                $html .= '<li class="page-item ' . ($page['isCurrent'] ? ' active' : '') . '"><a class="page-link" href="' . $page['url'] . '">' . $page['num'] . '</a></li>';
+                $html .= '<li class="page-item ' . ($page['isCurrent'] ? ' active' : '') . '">';
+                if(!$page['isCurrent']){
+                $html .='<a class="page-link" href="' . $page['url'] . '">' . $page['num'] . '</a>';
+                } else{
+                     $html .='<span class="page-link">' . $page['num'] . '</span>';
+                }
+                $html .='</li>';
             } else {
                 $html .= '<li class="disabled"><span>' . $page['num'] . '</span></li>';
             }

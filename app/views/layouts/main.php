@@ -7,6 +7,9 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/assets/css/font-awesome.min.css">
+   
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/assets/css/style.css">
 </head>
@@ -14,8 +17,8 @@
     <header>
         <div class="container">
             <div class="row">
-                <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      
+                <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark container">
+                
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -23,10 +26,10 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item active">
-                                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Tasks</a>
+                                <a class="nav-link" href="/tasks">Tasks</a>
                             </li>
                         </ul>
                     </div>
@@ -37,12 +40,12 @@
   <?php echo $content;?>
   <footer>
   <div class="container">
-            <div class="row">
+            <div class="row pull-right">
                 <div class="col-xs-12">
                 <p>Simple MVC for task manegment</p>
                 <p>Author: Alexander Kulyk</p>
                 <p>Email: <a href="mailTo:akulyk@outlook.com">akulyk@outlook.com</a></p>
-                <p>GitHub: <a href="https://github.com/akulyk">akulyk</a></p>
+                <p>GitHub: <a href="https://github.com/akulyk/simple-mvs">akulyk/simple-mvs</a></p>
                 </div>
             </div>
         </div>

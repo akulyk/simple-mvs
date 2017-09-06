@@ -6,6 +6,7 @@ use \Core\View;
 use \App\models\Task as TaskModel;
 use \App\models\User as UserModel;
 use Core\Paginator;
+use Core\Sorter;
 /**
  * Home controller
  *
@@ -23,7 +24,7 @@ class Task extends \Core\Controller
     {
         $page = 1;
         $criteria = [];
-        $criteria['limit'] = 1;
+        $criteria['limit'] = 3;
         if(isset($_GET['page'])){
             $page = (int)$_GET['page'];
             $criteria['offset'] = $criteria['limit'] * ($page-1);
@@ -32,17 +33,24 @@ class Task extends \Core\Controller
         $totalItems = TaskModel::countAll();
         $itemsPerPage = $criteria['limit'];
         $currentPage = $page;
-      //  $urlPattern = 'page=(:num)';
-     //   var_dump($criteria);die;
 
         $paginator = new Paginator($totalItems, $itemsPerPage, $currentPage);
+        $sorter = new Sorter();
+        $criteria['join'] = $sorter->join;
+        $criteria['order_by'] = $sorter->orderBy;
+        
         $tasks = TaskModel::findAll($criteria);
+        $task = new TaskModel();
+        $user = new UserModel;
         
-      
-        
-      return $this->render('Home/index',['tasks'=>$tasks,'paginator'=>$paginator]);
+            
+      return $this->render('Home/index',['tasks'=>$tasks,'paginator'=>$paginator,'sorter'=>$sorter,
+      'user'=>$user,'task'=>$task]);
     }/**/
     
+    /*
+    *
+    */
     
     public function addAction(){
         
@@ -57,19 +65,27 @@ class Task extends \Core\Controller
         'is_completed'=>0
         );
         $taskModel = TaskModel::findOrCreate($taskParams);
-       
+      
        if($taskModel->validate()){
            
            $taskModel->save();
         
+        
+        
            return $this->redirect('task/view',['id'=>$taskModel->id]);
            
        }
+       
+       return $this->render('task/edit',['user'=>$userModel,'task'=>$taskModel]);
              
         
     }/**/
     public function viewAction(int $id){
           $model = TaskModel::findOne($id);
+         
+    if(!$model ){
+        return $this->redirect('');
+    }
          return $this->render('task/view',['model'=>$model]);
       }
     
