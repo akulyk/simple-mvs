@@ -7,6 +7,7 @@ use \App\models\Task as TaskModel;
 use \App\models\User as UserModel;
 use Core\Paginator;
 use Core\Sorter;
+use App\traits\ImageTrait;
 /**
  * Home controller
  *
@@ -14,7 +15,7 @@ use Core\Sorter;
  */
 class Task extends \Core\Controller
 {
-
+    use ImageTrait;
     /**
      * Show the index page
      *
@@ -99,9 +100,21 @@ class Task extends \Core\Controller
     public function previewAction(){
         if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
             $data = new \stdClass();
-            $data->name = $_POST['User']['name'];
-            $data->email = $_POST['User']['email'];
-            $data->task =  $_POST['Task']['text'];
+            $data->name = "";
+            $data->email = "";
+            $data->task ="";
+            if(isset($_POST['User']['name'])) {
+                $data->name = $_POST['User']['name'];
+            }
+            if(isset($_POST['User']['email'])) {
+                $data->email = $_POST['User']['email'];
+            }
+            if(isset( $_POST['Task']['text'])) {
+                $data->task = $_POST['Task']['text'];
+            }
+
+            $data->image = '/images/'.$this->getUploadedImage();
+
 
            $view = new View();
            echo $view->render('task/_preview',['data'=>$data]);

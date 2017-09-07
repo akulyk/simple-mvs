@@ -46,3 +46,7 @@ footer p{
     margin-bottom:0;
     font-size:0.7rem
 }
+
+.img-thumbnail.small{
+    max-width:50px;
+}

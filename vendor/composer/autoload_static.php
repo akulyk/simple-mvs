@@ -28,7 +28,18 @@ class ComposerStaticInit7c0baa335460178fecca298af007aa1c
         ),
     );
 
+    public static $fallbackDirsPsr4 = array (
+        0 => __DIR__ . '/..' . '/league/color-extractor/src',
+    );
+
     public static $prefixesPsr0 = array (
+        'c' => 
+        array (
+            'claviska' => 
+            array (
+                0 => __DIR__ . '/..' . '/claviska/simpleimage/src',
+            ),
+        ),
         'J' => 
         array (
             'JasonGrimes' => 
@@ -43,6 +54,7 @@ class ComposerStaticInit7c0baa335460178fecca298af007aa1c
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit7c0baa335460178fecca298af007aa1c::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit7c0baa335460178fecca298af007aa1c::$prefixDirsPsr4;
+            $loader->fallbackDirsPsr4 = ComposerStaticInit7c0baa335460178fecca298af007aa1c::$fallbackDirsPsr4;
             $loader->prefixesPsr0 = ComposerStaticInit7c0baa335460178fecca298af007aa1c::$prefixesPsr0;
 
         }, null, ClassLoader::class);

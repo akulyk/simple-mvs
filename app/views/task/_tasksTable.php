@@ -24,6 +24,7 @@
                         </a>
                     </div></th>
                 <th>Text</th>
+                <th>Image</th>
                 <th>Status <div class="sort">
                         <a href="/?sort=status+asc" class="<?=($sorter->getSort()=="status asc")?"active":"";?>">
                             <i class="fa fa-chevron-up" aria-hidden="true"></i>
@@ -41,6 +42,9 @@
                 <td><?=$task->user->name;?></td>
                 <td><?=$task->user->email;?></td>
                 <td><?=$task->text;?></td>
+                <td><a class="fancybox" rel="task-images" href="<?=$task->getImage();?>">
+                        <img src="<?=$task->getImage();?>" class="img-thumbnail small">
+                    </a></td>
                 <td><?=$task->getStatus();?></td>
                 </tr>
                 <?php endforeach;?>

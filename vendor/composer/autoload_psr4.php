@@ -8,4 +8,5 @@ $baseDir = dirname($vendorDir);
 return array(
     'Core\\' => array($baseDir . '/core'),
     'App\\' => array($baseDir . '/app'),
+    '' => array($vendorDir . '/league/color-extractor/src'),
 );

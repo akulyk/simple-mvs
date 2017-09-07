@@ -38,7 +38,12 @@ class Task extends \Core\Model
        
        return "In work";
        
-   }/**/
+    }/**/
+
+
+    public function getImage(){
+        return '/images/'.$this->image;
+    }/**/
     
     public static function create($params = []){
         $model = new static;
@@ -63,8 +68,12 @@ class Task extends \Core\Model
         if($model->user_id){
             $model->user = User::findOne($model->user_id);
         }
-        
-        $model->image = $model->getImage();
+        if(isset($params['image'])){
+            $model->image = $params['image'];
+        }
+        if(!$model->image) {
+            $model->image = $model->getUploadedImage();
+        }
         
         
         return $model;

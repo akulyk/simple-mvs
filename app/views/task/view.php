@@ -17,6 +17,7 @@
                 <thead>
                 <th>User Name</th>
                 <th>User Email</th>
+                <th>Task Image</th>
                 <th>Task Description</th>
                 <th>Status</th>
                 </thead>
@@ -24,6 +25,10 @@
                 <tr>
                     <td><?=$model->user->name;?></td>
                     <td><?=$model->user->email;?></td>
+                    <td><a class="fancybox" rel="task-images" href="<?=$model->getImage();?>">
+                            <img src="<?=$model->getImage();?>" class="img-thumbnail small">
+                        </a>
+                    </td>
                     <td><?=$model->text;?></td>
                     <td><span class="<?=$model->is_completed?"text-success":"text-danger";?>">
                         <?php echo $model->getStatus();?>
