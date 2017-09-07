@@ -14,9 +14,16 @@
     <link rel="stylesheet" href="/assets/css/style.css">
  </head>
  <body>
-
+ <div class="container">
+     <div class="row ">
+         <div class="col-xs-12">
     <h1>An error occurred</h1>
     <p>Sorry, an error has occurred.</p>
+             <?php if(isset($message)){
+                 echo $message;
+            }?>
+         </div>
+     </div>
 
 <footer>
   <div class="container">

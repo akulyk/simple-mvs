@@ -52,7 +52,7 @@ class User extends \Core\Model
             $this->addError('email',"Email field cannot be empty!");
         }
         
-        if ($this->email && filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
+        if ($this->email && !filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
              $this->addError('email',"Email address is incorrect!");
         }      
         

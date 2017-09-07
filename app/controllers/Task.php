@@ -80,6 +80,9 @@ class Task extends \Core\Controller
              
         
     }/**/
+    /*
+     * @param $id;
+     */
     public function viewAction(int $id){
           $model = TaskModel::findOne($id);
          
@@ -87,6 +90,26 @@ class Task extends \Core\Controller
         return $this->redirect('');
     }
          return $this->render('task/view',['model'=>$model]);
-      }
+    }/**/
+
+    /*
+     *
+     *
+     */
+    public function previewAction(){
+        if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+            $data = new \stdClass();
+            $data->name = $_POST['User']['name'];
+            $data->email = $_POST['User']['email'];
+            $data->task =  $_POST['Task']['text'];
+
+           $view = new View();
+           echo $view->render('task/_preview',['data'=>$data]);
+           exit;
+        }
+
+    }/**/
+
+
     
 }/* end of Controller */

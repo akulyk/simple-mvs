@@ -1,4 +1,15 @@
 
+.breadcrumb.content{
+    margin-left: 0;
+}
+.content{
+    margin:60px;
+    
+    
+}
+.content p{
+    margin:0;
+}
 
 nav .pagination{
     justify-content:center;
@@ -19,8 +30,11 @@ div.sort a.active{
 color:#007bff;
 }
 
+
 #add-new-task{
-    display:block;
+    display:none;
+    margin:10px 25px;
+    overflow: hidden;
 }
 .edit-form{
     

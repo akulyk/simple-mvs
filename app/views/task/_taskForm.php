@@ -1,6 +1,6 @@
 
 
-<form action="/task/add" method="post">
+<form action="/task/add" method="post" id="task-form">
   <div class="form-group">
     <label for="name">User name</label>
     <input type="text" value="<?=$user->name;?>" required name="User[name]" class="form-control" id="user_name" aria-describedby="emailHelp" placeholder="Enter your name"> 
@@ -18,4 +18,25 @@
     <span class="text-danger"><?=$task->getError('text');?><span>
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="button" class="btn btn-defualt" data-toggle="modal" data-target="#taskModal">Preview</button>
 </form>
+
+<!-- Modal -->
+<div class="modal fade" id="taskModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Task Preview</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

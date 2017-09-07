@@ -5,38 +5,33 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-12">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/">Home</a></li>
-            <li class="breadcrumb-item"><a href="/task">Tasks</a></li>
+        <ol class="breadcrumb content">
+            <li class="breadcrumb-item"><a href="/">Tasks</a></li>
             <li class="breadcrumb-item active">Task Hash: <?=$model->hashString;?></li>
         </ol>
         </div>
     </div>
     <div class="row">
         <div class="col-xs-12">
-            <div class="task-body">
-            <p class="text-primary">Task Description</p>
-                <p>
-                <?php echo $model->text;?>
-                </p>
-            </div>
-            <div class="task-user">
-               <p class="text-primary">User name: 
-                <span class="text-dark">
-                <?php echo $model->user->name;?>
-                </span><br/>
-                  User email: 
-                  <span class="text-dark">
-                    <?php echo $model->user->email;?>
-                  </span>
-                </p>
-            </div>
-            <div class="task-status">
-            <p>
-              Task Status: <span class="<?=$model->is_completed?"text-success":"text-danger";?>">
-              <?php echo $model->getStatus();?></span>
-            </p>
-            </div>
+            <table class="table">
+                <thead>
+                <th>User Name</th>
+                <th>User Email</th>
+                <th>Task Description</th>
+                <th>Status</th>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><?=$model->user->name;?></td>
+                    <td><?=$model->user->email;?></td>
+                    <td><?=$model->text;?></td>
+                    <td><span class="<?=$model->is_completed?"text-success":"text-danger";?>">
+                        <?php echo $model->getStatus();?>
+                        </span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

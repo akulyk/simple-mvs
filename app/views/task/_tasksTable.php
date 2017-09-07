@@ -36,7 +36,7 @@
                 <tbody>
                 <?php foreach($tasks as $task):?>
                 <tr>
-                <td><?=$task->id;?></td>
+                <td><a href="task/view?id=<?=$task->id;?>"><?=$task->id;?></a></td>
                 <td><?=mb_substr($task->hashString,0,5);?>...</td>
                 <td><?=$task->user->name;?></td>
                 <td><?=$task->user->email;?></td>

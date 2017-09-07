@@ -11,6 +11,20 @@ class Paginator extends \JasonGrimes\Paginator{
 
         $this->updateNumPages();
     }
+
+    /**
+     * @param int $pageNum
+     * @return string
+     */
+    public function getPageUrl($pageNum)
+    {
+        $qs = $_SERVER['QUERY_STRING'];
+        $qs = preg_replace('/\&page=\d+/','',$qs);
+        if($qs){
+            $qs .="&";
+        }
+        return  $qs.str_replace(self::NUM_PLACEHOLDER, $pageNum, $this->urlPattern);
+    }
     
     /**
      * Render an HTML pagination control.

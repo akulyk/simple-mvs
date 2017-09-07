@@ -217,7 +217,7 @@ abstract class Model
     /*
     * set an error for model
     */
-    public function setError($field,$error){
+    public function addError($field,$error){
         $this->errors[$field] = $error;
         
     }/**/

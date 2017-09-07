@@ -25,5 +25,6 @@ $router = new Core\Router();
 $router->add('', ['controller' => 'Task', 'action' => 'index']);
 $router->add('task/add', ['controller' => 'Task', 'action' => 'add']);
 $router->add('task/view', ['controller' => 'Task', 'action' => 'view']);
+$router->add('task/preview', ['controller' => 'Task', 'action' => 'preview']);
     
 $router->dispatch($_SERVER['QUERY_STRING']);
