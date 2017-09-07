@@ -56,7 +56,7 @@ abstract class Controller
             
         $args = array_merge($args,$this->getMethodArgs($method));
             
-            if ($this->before() !== false) {
+            if ($this->before($name) !== false) {
                 call_user_func_array([$this, $method], $args);
                 $this->after();
             }

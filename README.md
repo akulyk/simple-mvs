@@ -134,4 +134,3 @@ Pretty URLs are enabled using web server rewrite rules. An [.htaccess](public/.h
 
 ---
 
-Signup for the course [here](https://www.udemy.com/php-mvc-from-scratch/?couponCode=githubpa1) on Udemy and understand how this framework is built from scratch, putting it all together step by step.
