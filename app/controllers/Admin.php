@@ -4,12 +4,12 @@ namespace App\Controllers;
 
 
 use \Core\View;
-use \App\models\Task as TaskModel;
-use \App\models\User as UserModel;
-use \App\models\Admin as AdminModel;
+use \App\Models\Task as TaskModel;
+use \App\Models\User as UserModel;
+use \App\Models\Admin as AdminModel;
 use Core\Paginator;
 use Core\Sorter;
-use App\traits\ImageTrait;
+use App\Traits\ImageTrait;
 
 /**
  * Admin controller

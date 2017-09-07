@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use PDO;
-use App\traits\ImageTrait;
+use App\Traits\ImageTrait;
 use App\Models\User;
 
 /**

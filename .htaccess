@@ -1,0 +1,13 @@
+ AddDefaultCharset UTF-8
+<IfModule mod_rewrite.c>
+  Options +FollowSymlinks
+    RewriteEngine On
+RewriteBase /
+
+RewriteRule ^(dayside) - [L]
+
+
+RewriteCond %{THE_REQUEST} /public/([^\s?]*) [NC]
+RewriteRule ^ %1 [L,NE,R=302]
+RewriteRule ^((?!public/).*)$ public/$1 [L,NC]
+</IfModule>

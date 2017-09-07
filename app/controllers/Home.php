@@ -19,6 +19,6 @@ class Home extends \Core\Controller
      */
     public function indexAction()
     {
-      return $this->render('Home/index');
+      return $this->render('home/index');
     }
 }

@@ -3,11 +3,11 @@
 namespace App\Controllers;
 
 use \Core\View;
-use \App\models\Task as TaskModel;
-use \App\models\User as UserModel;
+use \App\Models\Task as TaskModel;
+use \App\Models\User as UserModel;
 use Core\Paginator;
 use Core\Sorter;
-use App\traits\ImageTrait;
+use App\Traits\ImageTrait;
 /**
  * Task controller
  *
@@ -45,7 +45,7 @@ class Task extends \Core\Controller
         $user = new UserModel;
         
             
-      return $this->render('Home/index',['tasks'=>$tasks,'paginator'=>$paginator,'sorter'=>$sorter,
+      return $this->render('home/index',['tasks'=>$tasks,'paginator'=>$paginator,'sorter'=>$sorter,
       'user'=>$user,'task'=>$task]);
     }/**/
     
@@ -84,8 +84,9 @@ class Task extends \Core\Controller
     /*
      * @param $id;
      */
-    public function viewAction(int $id){
-          $model = TaskModel::findOne($id);
+    public function viewAction($id){
+		$id = (int)$id;
+        $model = TaskModel::findOne($id);
          
     if(!$model ){
         return $this->redirect('');

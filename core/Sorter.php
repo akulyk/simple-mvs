@@ -2,7 +2,7 @@
 
 namespace Core;
 
-use App\models\User;
+use App\Models\User;
 
 class Sorter {
     public $sort;
