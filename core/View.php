@@ -49,9 +49,11 @@ class View
         $url = '/';
 
        if($route){
-           $url .=$route;
+           $url =$route;
+       } else{
+           $url = '/';
        }
-       if(count($params>0)){
+       if(count($params)>0){
            $url .='?';
            $i=1;
            foreach($params as $k =>$v){
@@ -59,7 +61,7 @@ class View
                if($i < count($params)){
                    $url .='&';
                }
-
+            $i++;
            }
        }
        return $url;

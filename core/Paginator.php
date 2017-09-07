@@ -5,11 +5,13 @@ namespace Core;
 class Paginator extends \JasonGrimes\Paginator{
 
     protected $qs;
+    protected $route;
 
-     public function __construct($totalItems, $itemsPerPage, $currentPage, $urlPattern = 'page=(:num)')
+     public function __construct($totalItems, $itemsPerPage, $currentPage, $urlPattern = 'page=(:num)',$route="")
     {
        parent::__construct($totalItems, $itemsPerPage, $currentPage);
         $this->urlPattern = $urlPattern;
+        $this->route = $route;
         $this->qs = &$_SERVER['QUERY_STRING'];
 
 
@@ -39,10 +41,14 @@ class Paginator extends \JasonGrimes\Paginator{
     }/**/
 
     protected function prepareUrl($url){
-        $string = "";
+        $string = $this->route;
+        if($this->route) {
+            $this->qs = preg_replace("~{$this->route}(\&|\?)~", '', $this->qs);
+        }
         if(strpos($this->qs,'?')===false && $this->qs) {
             $string .= '?';
         }
+
         $string .= $this->qs;
         $string = preg_replace('/(\&|\?)page=\d+/','',$string) ;
         if($url) {
@@ -53,7 +59,7 @@ class Paginator extends \JasonGrimes\Paginator{
             }
         }
         $string.= $url;
-      
+
         return $string;
     }/**/
     
@@ -70,7 +76,7 @@ class Paginator extends \JasonGrimes\Paginator{
         $html =  '<nav aria-label="Page navigation">';
         $html .= '<ul class="pagination">';
         if ($this->getPrevUrl()) {
-            $html .= '<li class="page-item"><a class="page-link" href="' . $this->prepareUrl($this->getPrevUrl() ) . '">&laquo; '. $this->previousText .'</a></li>';
+            $html .= '<li class="page-item"><a class="page-link" href="/' . $this->prepareUrl($this->getPrevUrl() ) . '">&laquo; '. $this->previousText .'</a></li>';
         }
 
         foreach ($this->getPages() as $page) {
@@ -78,7 +84,7 @@ class Paginator extends \JasonGrimes\Paginator{
             if ($page['url']) {
                 $html .= '<li class="page-item ' . ($page['isCurrent'] ? ' active' : '') . '">';
                 if(!$page['isCurrent']){
-                $html .='<a class="page-link" href="' . $this->prepareUrl($page['url'] ) . '">' . $page['num'] . '</a>';
+                $html .='<a class="page-link" href="/' . $this->prepareUrl($page['url'] ) . '">' . $page['num'] . '</a>';
                 } else{
                      $html .='<span class="page-link">' . $page['num'] . '</span>';
                 }
@@ -89,7 +95,7 @@ class Paginator extends \JasonGrimes\Paginator{
         }
 
         if ($this->getNextUrl()) {
-            $html .= '<li class="page-item"><a class="page-link" href="' . $this->prepareUrl($this->getNextUrl() ) . '">'. $this->nextText .' &raquo;</a></li>';
+            $html .= '<li class="page-item"><a class="page-link" href="/' . $this->prepareUrl($this->getNextUrl() ) . '">'. $this->nextText .' &raquo;</a></li>';
         }
         $html .= '</ul>';
         $html .= '</nav>';

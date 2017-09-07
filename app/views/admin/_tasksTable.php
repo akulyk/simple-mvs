@@ -9,29 +9,29 @@
                 <th>Hash</th>
                 <th>User Name 
                     <div class="sort">
-                        <a href="<?=$this->createURl('admin/index',['sort'=>'name+asc']);?>" class="<?=($sorter->getSort()=="name asc")?"active":"";?>">
+                        <a href="<?=$this->createURl('/admin/index',['sort'=>'name+asc']);?>" class="<?=($sorter->getSort()=="name asc")?"active":"";?>">
                             <i class="fa fa-chevron-up" aria-hidden="true"></i>
                         </a>
-                        <a href="<?=$this->createURl('admin/index',['sort'=>'name+desc']);?>" class="<?=($sorter->getSort()=="name desc")?"active":"";?>">
+                        <a href="<?=$this->createURl('/admin/index',['sort'=>'name+desc']);?>" class="<?=($sorter->getSort()=="name desc")?"active":"";?>">
                             <i class="fa fa-chevron-down" aria-hidden="true"></i>
                         </a>
                     </div>
                 </th>
                 <th>User Email <div class="sort">
-                        <a href="<?=$this->createURl('admin/index',['sort'=>'email+asc']);?>" class="<?=($sorter->getSort()=="email asc")?"active":"";?>">
+                        <a href="<?=$this->createURl('/admin/index',['sort'=>'email+asc']);?>" class="<?=($sorter->getSort()=="email asc")?"active":"";?>">
                             <i class="fa fa-chevron-up" aria-hidden="true"></i>
                         </a>
-                        <a href="<?=$this->createURl('admin/index',['sort'=>'email+desc']);?>" class="<?=($sorter->getSort()=="email desc")?"active":"";?>">
+                        <a href="<?=$this->createURl('/admin/index',['sort'=>'email+desc']);?>" class="<?=($sorter->getSort()=="email desc")?"active":"";?>">
                             <i class="fa fa-chevron-down" aria-hidden="true"></i>
                         </a>
                     </div></th>
                 <th>Text</th>
                 <th>Image</th>
                 <th>Status <div class="sort">
-                        <a href="<?=$this->createURl('admin/index',['sort'=>'status+asc']);?>" class="<?=($sorter->getSort()=="status asc")?"active":"";?>">
+                        <a href="<?=$this->createURl('/admin/index',['sort'=>'status+asc']);?>" class="<?=($sorter->getSort()=="status asc")?"active":"";?>">
                             <i class="fa fa-chevron-up" aria-hidden="true"></i>
                         </a>
-                        <a href="<?=$this->createURl('admin/index',['sort'=>'status+desc']);?>" class="<?=($sorter->getSort()=="status desc")?"active":"";?>">
+                        <a href="<?=$this->createURl('/admin/index',['sort'=>'status+desc']);?>" class="<?=($sorter->getSort()=="status desc")?"active":"";?>">
                             <i class="fa fa-chevron-down" aria-hidden="true"></i>
                         </a>
                     </div></th>
@@ -39,7 +39,7 @@
                 <tbody>
                 <?php foreach($tasks as $task):?>
                 <tr>
-                <td><a href="<?=$this->createURl('admin/view',['id'=>$task->id]);?>"><?=$task->id;?></a></td>
+                <td><a href="<?=$this->createURl('/admin/view',['id'=>$task->id]);?>"><?=$task->id;?></a></td>
                 <td><?=mb_substr($task->hashString,0,5);?>...</td>
                 <td><?=$task->user->name;?></td>
                 <td><?=$task->user->email;?></td>

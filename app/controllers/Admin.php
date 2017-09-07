@@ -52,7 +52,7 @@ class Admin extends \Core\Controller
         $itemsPerPage = $criteria['limit'];
         $currentPage = $page;
 
-        $paginator = new Paginator($totalItems, $itemsPerPage, $currentPage);
+        $paginator = new Paginator($totalItems, $itemsPerPage, $currentPage,'page=(:num)','admin/index');
         $sorter = new Sorter();
         $criteria['join'] = $sorter->join;
         $criteria['order_by'] = $sorter->orderBy;
