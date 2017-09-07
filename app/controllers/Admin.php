@@ -68,7 +68,11 @@ class Admin extends \Core\Controller
     }/**/
 
     public function loginAction(){
-        echo "login needed!";
+        $admin = new \stdClass();
+        $admin->login = '';
+        $admin->password ='';
+
+        return $this->render('admin/login',['admin'=>$admin]);
     }/**/
 
     public function logoutAction(){
