@@ -19,7 +19,7 @@ class Config
      * Database name
      * @var string
      */
-    const DB_NAME = 'root';
+    const DB_NAME = 'mvc';
     
      /**
      * Database prefix

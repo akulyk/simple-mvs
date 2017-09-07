@@ -70,9 +70,9 @@ class Task extends \Core\Controller
        if($taskModel->validate()){
            
            $taskModel->save();
-        
-        
-        
+
+
+           $this->session->setFlash('success','New Task added!');
            return $this->redirect('task/view',['id'=>$taskModel->id]);
            
        }
@@ -101,18 +101,31 @@ class Task extends \Core\Controller
     public function previewAction(){
         if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
             $data = new \stdClass();
+            $params = [];
             $data->name = "";
             $data->email = "";
             $data->task ="";
             if(isset($_POST['User']['name'])) {
                 $data->name = $_POST['User']['name'];
+                $params['name'] = $data->name;
             }
             if(isset($_POST['User']['email'])) {
                 $data->email = $_POST['User']['email'];
+                $params['email'] = $data->email;
             }
             if(isset( $_POST['Task']['text'])) {
                 $data->task = $_POST['Task']['text'];
+                $params['task'] = $data->task;
             }
+
+
+            $task = new TaskModel;
+
+            // little hack for clear preview
+            $params = $task->clearParams($params);
+           foreach($params as $k =>$v){
+               $data->{$k} = $v;
+           }
 
             $data->image = '/images/'.$this->getUploadedImage();
 

@@ -77,26 +77,30 @@ class Admin extends \Core\Controller
 
     }/**/
 
-    public function updateStatusAction($id,$status){
-        if($status){
-            $data =[
-            'spanClass' =>"text-success",
-            'linkTitle' => "Open Task Again",
-                'text' =>'Complete'
+    public function updateStatusAction($id,$status)
+    {
+        if ($status) {
+            $data = [
+                'spanClass' => "text-success",
+                'linkTitle' => "Open Task Again",
+                'text' => 'Complete'
 
             ];
-        } else{
-            $data =[
-                'spanClass' =>"text-danger",
+        } else {
+            $data = [
+                'spanClass' => "text-danger",
                 'linkTitle' => "Close Task",
-                'text' =>'In work'
+                'text' => 'In work'
 
             ];
         }
-        $data['linkHref'] = '/admin/update-status?id='.$id.'&status='.!$status;
+        $data['linkHref'] = '/admin/update-status?id=' . $id . '&status=' . !$status;
         $task = TaskModel::findOne((int)$id);
+        if ($task) {
+
         $task->is_completed = (int)$status;
-        $task->update(['is_completed'=>$task->is_completed]);
+        $task->update(['is_completed' => $task->is_completed]);
+        }
 
         echo json_encode($data);
     }/**/

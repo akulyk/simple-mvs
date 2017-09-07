@@ -295,7 +295,7 @@ abstract class Model
     * clear each value, which is not in safeAttributes array from a mess
     * or html tags and encode html entities
     */
-    protected function clearParams(array $params){
+    public function clearParams(array $params){
         if(count ($params) > 0){
          foreach($params as $k =>$v){
              if(!in_array($k,$this->safeAttributes)){

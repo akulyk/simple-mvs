@@ -1,5 +1,5 @@
 <?php
-
+use Core\Session;
 ?>
 
 <div class="container">
@@ -13,6 +13,7 @@
     </div>
     <div class="row">
         <div class="col-xs-12">
+            <?php echo Session::renderAlertsStatic();?>
             <table class="table">
                 <thead>
                 <th>User Name</th>
