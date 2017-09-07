@@ -8,7 +8,7 @@ trait ImageTrait
     private $maxWidth = 320;
     protected function getUploadedImage(){
     if(isset($_FILES['Task']) && $_FILES['Task']['error']['image'] == 0) {
-       
+
         $images = $this->diverse_array($_FILES['Task']);
         $uploaddir = realpath(dirname(__FILE__).'/../../public/images/');
         $pathInfo = pathinfo($images['image']['name']);

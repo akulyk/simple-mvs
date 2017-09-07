@@ -122,9 +122,12 @@ class Task extends \Core\Controller
             $task = new TaskModel;
 
             // little hack for clear preview
-            $params = $task->clearParams($params);
-           foreach($params as $k =>$v){
-               $data->{$k} = $v;
+            $cleared = $task->clearParams($params);
+           
+           foreach($cleared as $k =>$v){
+               if(property_exists($data,$k)) {
+                   $data->{$k} = $v;
+               }
            }
 
             $data->image = '/images/'.$this->getUploadedImage();

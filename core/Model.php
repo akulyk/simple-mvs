@@ -299,9 +299,13 @@ abstract class Model
         if(count ($params) > 0){
          foreach($params as $k =>$v){
              if(!in_array($k,$this->safeAttributes)){
-            $params[$v] = strip_tags($v);
-            $params[$v] = htmlentities($v);
-            $params[$v] = trim($v);
+                 $value = strip_tags($v);
+                 $value = htmlentities($value);
+                 $value = trim($value);
+                 $params[$k] = $value;
+
+                 $value = null;
+
              }
          }   
             
