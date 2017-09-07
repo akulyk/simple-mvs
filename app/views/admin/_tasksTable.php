@@ -47,7 +47,21 @@
                 <td><a class="fancybox" rel="task-images" href="<?=$task->getImage();?>">
                         <img src="<?=$task->getImage();?>" class="img-thumbnail small">
                     </a></td>
-                <td><?=$task->getStatus();?></td>
+                <td>
+                    <span class="text-<?=$task->is_completed?"success":"danger";?>">
+                        <?=$task->getStatus();?>
+                    </span>
+                    <a class="change-task-status" href="<?=$this->createURl('/admin/update-status',
+                        ['id'=>$task->id,'status'=>!$task->is_completed]);?>"
+                       <?php if($task->is_completed):?>
+                       title="Open Task Again"
+                        <?php else:?>
+                           title="Close Task"
+                        <?php endif;?>
+                        >
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                    </a>
+                </td>
                 </tr>
                 <?php endforeach;?>
                 </tbody>

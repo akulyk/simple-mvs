@@ -17,8 +17,6 @@ $(function(){
         }
      //  formData.append('name',form.find('input[name="User[name]"]').val());
 
-
-
        $.ajax({
            type: 'POST',
            url: '/task/preview',
@@ -33,5 +31,32 @@ $(function(){
            }
        });
     })
+
+    $('a.change-task-status').on('click',function(e){
+        e.preventDefault();
+        var self = $(this);
+        var span = self.prev('span');
+        var url = self.attr('href');
+        $.ajax({
+            type: 'GET',
+            url: url,
+            dataType:'json',
+            success: function(obj){
+                if(typeof obj.linkTitle !== "undefined") {
+                    self.attr('title', obj.linkTitle);
+                }
+                if(typeof obj.linkHref !== "undefined") {
+                    self.attr('href', obj.linkHref);
+                }
+                if(typeof obj.spanClass !== "undefined") {
+                    span.attr('class', obj.spanClass);
+                }
+                if(typeof obj.text !== "undefined") {
+                    span.text(obj.text);
+                }
+
+            }
+        });
+    });
 
 });

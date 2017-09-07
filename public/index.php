@@ -31,5 +31,6 @@ $router->add('admin/view', ['controller' => 'Admin', 'action' => 'view']);
 $router->add('admin/task/view', ['controller' => 'Admin', 'action' => 'view']);
 $router->add('admin/login', ['controller' => 'Admin', 'action' => 'login']);
 $router->add('admin/logout', ['controller' => 'Admin', 'action' => 'logout']);
+$router->add('admin/update-status', ['controller' => 'Admin', 'action' => 'updateStatus']);
 
 $router->dispatch($_SERVER['QUERY_STRING']);

@@ -152,7 +152,7 @@ abstract class Model
     public function save(){
         if($this->validate()){
          if($this->id){
-             return $this->update();
+             return $this->update($this->getParamsForUpdate());
          }
          
          return $this->insert($this->getParamsForInsert());
@@ -215,13 +215,57 @@ abstract class Model
         return $insert;
         
     }/**/
+
+    protected function prepareParamsForUpdate($params){
+        $update = "";
+
+        if(count($params) > 0){
+            $i = 1;
+            foreach ($params as $k=>$v){
+                $update .= " `{$k}` = :{$k} ";
+                if($i < count($params)){
+                    $update .= ", ";
+
+                }
+                $i++;
+            }
+
+        }
+        return $update;
+
+    }/**/
     
     /*
     * function in development
     */
-    public function update(){
+    public function update(array $params){
+        $sql = "UPDATE ".$this->getTableName()." SET ";
+        $sql .= $this->prepareParamsForUpdate($params);
+
+        $sql .="WHERE id=". $this->id;
+
+        $query = $this->db->prepare($sql);
+      
+        foreach($params as $k=>$v){
+            $query->bindValue(":{$k}", $v);
+        }
+
+        $result = false;
+        try{
+            $result = $query->execute();
+        } catch(\PDOException $e){
+
+            echo $e->getMessage();
+
+        }
+        return $result;
         
-        
+    }/**/
+
+
+
+    protected function getParamsForUpdate(){
+
     }
     
     /*

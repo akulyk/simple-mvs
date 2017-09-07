@@ -124,6 +124,22 @@ class Task extends \Core\Model
         return $params;
         
     }/**/
+
+    /*
+    * which fields should be updated in db
+    * return @array
+    */
+    protected function getParamsForUpdate(){
+        $params = [
+            'text'=>$this->text,
+            'hashString'=>$this->hashString,
+            'image'=> $this->image,
+            'user_id'=>$this->user_id,
+            'is_completed'=> $this->is_completed,
+        ];
+        return $params;
+
+    }/**/
     
    
      
