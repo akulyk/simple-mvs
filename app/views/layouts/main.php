@@ -1,3 +1,6 @@
+<?php
+use Core\Session;
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,6 +33,15 @@
                             <li class="nav-item active">
                                 <a class="nav-link" href="/">Tasks <span class="sr-only"></span></a>
                             </li>
+                            <?php if(Session::getInstance()->get('admin_id')):?>
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="/admin/logout">Logout <span class="sr-only"></span></a>
+                                </li>
+                            <?php else:?>
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="/admin/login">Login <span class="sr-only"></span></a>
+                                </li>
+                            <?php endif;?>
                         </ul>
                     </div>
                 </nav>

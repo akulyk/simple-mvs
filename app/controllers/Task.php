@@ -9,7 +9,7 @@ use Core\Paginator;
 use Core\Sorter;
 use App\traits\ImageTrait;
 /**
- * Home controller
+ * Task controller
  *
  * 
  */

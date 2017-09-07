@@ -17,6 +17,7 @@ class Task extends \Core\Model
     // uploaded image
     use ImageTrait;
     protected $table = 'tasks';
+    protected $tableAlias = 't';
     
     public $id;
     public $text;

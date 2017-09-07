@@ -6,14 +6,14 @@ namespace App\Controllers;
 use \Core\View;
 use \App\models\Task as TaskModel;
 use \App\models\User as UserModel;
+use \App\models\Admin as AdminModel;
 use Core\Paginator;
 use Core\Sorter;
 use App\traits\ImageTrait;
 
 /**
- * Home controller
+ * Admin controller
  *
- * PHP version 7.0
  */
 class Admin extends \Core\Controller
 {
@@ -21,15 +21,13 @@ class Admin extends \Core\Controller
     public function __construct($route_params)
     {
         parent::__construct($route_params);
-        if(!isset($_SESSION)){
-            session_start();
-        }
+
     }/**/
 
 
     public function before(){
 
-       if(!isset($_SESSION['admin_id']) && !in_array('login',func_get_args())){
+       if(!$this->session->get('admin_id') && !in_array('login',func_get_args())){
             $this->redirect('admin/login');
        }
 
@@ -67,16 +65,44 @@ class Admin extends \Core\Controller
       'user'=>$user,'task'=>$task]);
     }/**/
 
+    public function viewAction($id){
+
+        $model = TaskModel::findOne($id);
+
+        if(!$model ){
+            $this->session->setFlash('danger','Such task does not exist!');
+            return $this->redirect('admin/index');
+        }
+        return $this->render('admin/view',['model'=>$model]);
+
+    }/**/
+
     public function loginAction(){
-        $admin = new \stdClass();
-        $admin->login = '';
-        $admin->password ='';
+
+        $admin = AdminModel::create($this->request->post('Admin'));
+     //   var_dump($admin);die;
+        if($admin->login) {
+            if ($admin->login()) {
+
+                $this->session->set('admin_id',$admin->id);
+                $this->session->setFlash('success','Welcome to Admin Area!');
+                return $this->redirect('admin/index');
+            } else{
+                $this->session->setFlash('danger','Wrong login or password!');
+            }
+        } else {
+            $this->session->setFlash('warning', 'You should login to enter Admin area!');
+
+        }
 
         return $this->render('admin/login',['admin'=>$admin]);
     }/**/
 
     public function logoutAction(){
 
+        $this->session->unsetVal('admin_id');
+        $this->session->setFlash('warning', 'You have been logout from Admin Area');
+        return $this->redirect('');
     }/**/
 
 

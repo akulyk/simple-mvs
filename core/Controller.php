@@ -1,6 +1,8 @@
 <?php
 
 use Core\View;
+use Core\Session;
+use Core\Request;
 
 namespace Core;
 
@@ -25,6 +27,20 @@ abstract class Controller
     protected $route_params = [];
 
     /**
+     * For work with session
+     * @var object of Session class
+     */
+
+    protected $session;
+
+    /**
+     * For work with $_POST & $_GET
+     * @var object of Session class
+     */
+
+    protected $request;
+
+    /**
      * Class constructor
      *
      * @param array $route_params  Parameters from the route
@@ -34,6 +50,8 @@ abstract class Controller
     public function __construct($route_params)
     {
         $this->route_params = $route_params;
+        $this->session = new Session();
+        $this->request = new Request();
     }
 
     /**

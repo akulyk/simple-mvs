@@ -14,6 +14,7 @@ abstract class Model
     protected $db; 
     protected $table;
     protected $tablePrefix;
+    protected $tableAlias;
     public $id;
     public $errors = [];
     protected $safeAttributes = [];
@@ -34,12 +35,20 @@ abstract class Model
               
     }/**/
     
-    
-         
+
     public function getTableName(){
          return $this->tablePrefix.$this->table;
          
     }/**/
+
+    /*
+     * @return string
+     */
+    public function getTableAlias($prefix=""){
+        if($this->tableAlias) {
+            return $this->tableAlias.$prefix;
+        }
+    }
     
     public static function countAll(){
           $class = new static;
@@ -56,7 +65,7 @@ abstract class Model
         $class = new static;
         $models = [];
         $bind = [];
-        $sql =  'SELECT * FROM '.$class->getTableName();
+        $sql =  'SELECT '.$class->getTableAlias(".").'*  FROM '.$class->getTableName()." ".$class->getTableAlias();
         if(isset($criteria['join']) && $criteria['join']){
             $sql .= " ".$criteria['join']." ";
         }
@@ -84,12 +93,13 @@ abstract class Model
        try{
         $query->execute();
        } catch (\PDOException $e){
-           var_dump($query->debugDumpParams());
+
             echo $e->getMessage();
           die;
            
        }
         $rows = $query->fetchAll(PDO::FETCH_ASSOC);
+
        
        if(count($rows)>0){
         foreach ($rows as $row){

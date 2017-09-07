@@ -43,7 +43,29 @@ class View
         require($_file_);
 
         return ob_get_clean();
-    }
+    }/**/
+
+    public function createUrl($route = '',$params=[]){
+        $url = '/';
+
+       if($route){
+           $url .=$route;
+       }
+       if(count($params>0)){
+           $url .='?';
+           $i=1;
+           foreach($params as $k =>$v){
+               $url .=$k."=".$v;
+               if($i < count($params)){
+                   $url .='&';
+               }
+
+           }
+       }
+       return $url;
+
+    }/**/
+
 
    
 }
